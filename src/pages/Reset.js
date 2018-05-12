@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from "react-router";
 import auth from "../authorization/auth";
 import { observer } from "mobx-react";
 import { observe } from "mobx";
 
-const Login = observer(class Login extends Component {
+const Reset = observer(class Reset extends Component {
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -25,41 +24,30 @@ const Login = observer(class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const email = this.refs.email.value
     const pass = this.refs.pass.value
-    auth.login(email, pass, (loggedIn) => { })
+    const resetPasswordToken = this.props.params.resetPasswordToken;
+    auth.resetPassword(pass, resetPasswordToken, (loggedIn) => { })
   }
 
   render() {
     return (
       <div className="d-flex justify-content-center align-items-center container">
         <form className="form-signin w-100" onSubmit={this.handleSubmit}>
-          <h2 className="form-signin-heading mt-3">Login to Open Stats</h2> <br />
-          <label htmlFor="inputEmail" className="sr-only">Email address</label>
-          <input type="text" ref="email" className="form-control" placeholder="Email" required autoFocus />
+          <h2 className="form-signin-heading mt-3">Enter a new password</h2><br />
           <label htmlFor="inputPassword" className="sr-only">Password</label>
           <input type="password" ref="pass" className="form-control mt-2" placeholder="Password" required />
-          <button className="btn btn-lg btn-primary btn-block mt-2" type="submit">Login</button>
+          <button className="btn btn-lg btn-primary btn-block mt-2" type="submit">Reset password</button> <br />
           <center>
-            <br />
-            {auth.failedLogin && (
-              <div className="alert alert-danger" role="alert">
-                {auth.errorMessage}
-              </div>
-            )}
-            <p className="mt-5">No account? No problem!</p>
-            <Link to={'/signup/'}>
-              <button type="button" className="btn btn-success">Create Account</button>
-            </Link>
-            <br />
-            <Link to={'/forgot/'}>
-              <button type="button" className="btn btn-link">Forgot password?</button>
-            </Link>
-          </center>
+          {auth.resetPassMessage && (
+            <div className="alert alert-warning" role="alert">
+              {auth.resetPassMessage}
+            </div>
+          )}
+        </center>
         </form>
       </div>
     )
   }
 })
 
-export default Login;
+export default Reset;

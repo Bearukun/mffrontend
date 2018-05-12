@@ -60,7 +60,7 @@ const Stats = observer(
 
         return (
           <div>
-            <h4>Stats for {game.name} </h4>
+            <h4 className="mt-3">Stats for {game.name} </h4>
             {statsForm}
           </div>
         )

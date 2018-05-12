@@ -31,9 +31,8 @@ const Forgot = observer(class Forgot extends Component {
   render() {
     return (
       <div className="d-flex justify-content-center align-items-center container">
-        <form className="form-signin" onSubmit={this.handleSubmit}>
-          <h2 className="form-signin-heading mt-3">Forgot password</h2>
-          <label htmlFor="inputEmail" className="sr-only">Email address</label>
+        <form className="form-signin w-100" onSubmit={this.handleSubmit}>
+          <h2 className="form-signin-heading mt-3">Forgot password</h2> <br />
           <input type="text" ref="email" className="form-control" placeholder="Email" required autoFocus />
           <button className="btn btn-lg btn-primary btn-block mt-2" type="submit">Send reset mail</button>
           <center>

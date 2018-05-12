@@ -14,6 +14,7 @@ class AuthenticationHandler {
   @observable isUser = false;
   @observable email = "";
   @observable mailMessage = "";
+  @observable resetPassMessage = "";
   @observable signUpMessage = "";
 
   @computed
@@ -109,7 +110,7 @@ class AuthenticationHandler {
   @action
   reset = (email, cb) => {
 
-    var user = {email: email};
+    var user = { email: email };
 
     var options = {
       method: "POST",
@@ -119,7 +120,7 @@ class AuthenticationHandler {
       })
     }
     fetch(URL + "api/forgot", options).then(res => {
- 
+
       res.json().then(data => {
         this.setMailMessage(data.msg);
       });
@@ -131,6 +132,39 @@ class AuthenticationHandler {
   }
 
   @action
+  setResetPassMessage = (value) => {
+    this.resetPassMessage = value;
+  }
+
+  @action
+  resetPassword = (newPassword, resetPasswordToken, cb) => {
+
+    var info = {
+      resetPasswordToken: resetPasswordToken,
+      newPassword: newPassword
+    };
+
+    var options = {
+      method: "POST",
+      body: JSON.stringify(info),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    }
+    fetch(URL + "api/reset", options).then(res => {
+
+      res.json().then(data => {
+        this.setResetPassMessage(data.msg);
+      });
+    }).catch(err => {
+      console.log(err.message);
+      //Self because we use this with exceptions
+    })
+    return;
+  }
+
+
+  @action
   setSignUpMessage = (value) => {
     this.signUpMessage = value;
   }
@@ -138,7 +172,7 @@ class AuthenticationHandler {
   @action
   signup = (newUser) => {
 
-   
+
 
     var options = {
       method: "POST",
@@ -148,7 +182,7 @@ class AuthenticationHandler {
       })
     }
     fetch(URL + "api/signup", options).then(res => {
- 
+
       res.json().then(data => {
         this.setSignUpMessage(data.msg);
       });

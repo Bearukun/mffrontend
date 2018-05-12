@@ -6,6 +6,7 @@ import App from './pages/App';
 import Home from './pages/Home';
 import Login from "./pages/Login";
 import Forgot from "./pages/Forgot";
+import Reset from "./pages/Reset"
 import Logout from './pages/Logout';
 import Signup from './pages/Signup';
 import About from "./pages/About";
@@ -31,6 +32,7 @@ ReactDOM.render((
       <IndexRoute component={Home}/>
       <Route path="login" component={Login} />
       <Route path="forgot" component={Forgot} />
+      <Route path="forgot/:resetPasswordToken" component={Reset} />
       <Route path="logout" component={Logout} />
       <Route path="signup" component={Signup} />
       <Route path="about" component={About} />
