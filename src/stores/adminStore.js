@@ -15,7 +15,7 @@ class AdminStore {
     email: {},
     roles: {},
     info: {},
-    games: [{sessionID: "", loginDateAndTime: "", logoutDateAndTime: ""}]
+    games: [{ sessionID: "", loginDateAndTime: "", logoutDateAndTime: "" }]
   }
 
   @action
@@ -44,16 +44,14 @@ class AdminStore {
         }
         return res.json();
       })
-      .then(action((res) => {  //Note the action wrapper to allow for useStrict
+      .then(action((res) => {
         if (errorCode !== 200) {
           throw new Error(`${res.error.message} (${res.error.code})`);
         }
         else {
-          // this.messageFromServer = res.message;
           this.users.replace(res.users);
         }
       })).catch(err => {
-        //This is the only way (I have found) to verify server is not running
         this.setErrorMessage(fetchHelper.addJustErrorMessage(err));
       })
   }
@@ -65,7 +63,7 @@ class AdminStore {
     this.messageFromServer = "";
     let errorCode = 200;
     const options = fetchHelper.makeOptions("GET", true);
-    fetch(URL + "api/user/"+wantedUser, options)
+    fetch(URL + "api/user/" + wantedUser, options)
       .then((res) => {
         if (res.status > 210 || !res.ok) {
           errorCode = res.status;
@@ -92,7 +90,7 @@ class AdminStore {
     this.messageFromServer = "";
     let errorCode = 200;
     const options = fetchHelper.makeOptions("DELETE", true);
-    fetch(URL + "api/delete/"+wantedUser, options)
+    fetch(URL + "api/delete/" + wantedUser, options)
       .then((res) => {
         if (res.status > 210 || !res.ok) {
           errorCode = res.status;
