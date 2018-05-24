@@ -9,10 +9,8 @@ import Forgot from "./pages/Forgot";
 import Reset from "./pages/Reset"
 import Logout from './pages/Logout';
 import Signup from './pages/Signup';
-import About from "./pages/About";
 import Stats from "./pages/Stats";
 import AdminPage from './pages/AdminPage';
-import Dashboard from './pages/Dashboard';
 import User from './pages/User';
 import Users from './pages/Users';
 import auth from './authorization/auth';
@@ -35,12 +33,10 @@ ReactDOM.render((
       <Route path="forgot/:resetPasswordToken" component={Reset} />
       <Route path="logout" component={Logout} />
       <Route path="signup" component={Signup} />
-      <Route path="about" component={About} />
       <Route path="stats" component={Stats} />
       <Route path="admin" component={AdminPage} />
       <Route path="users" component={Users} />
       <Route path="user/:username" component={User} />
-      <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
     </Route>
   </Router>
 ), document.getElementById('root'))
